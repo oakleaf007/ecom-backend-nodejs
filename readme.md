@@ -23,6 +23,11 @@ This API handles authentication, product management, and order processing for a 
 - **JWT_SECRET** is for JWt secret
 - **DB_URL** is for PostgreSQL connection string
 
+
+## variable info
+
+- Variables that backend is expecting : **id**, **name**, **email**, **password** & just for your info JWT token decoded value is also **id**
+
 ---
 ## Folder structure info
 
