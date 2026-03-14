@@ -10,13 +10,21 @@ This API handles authentication, product management, and order processing for a 
 - **Node.js**
 - **Express.js**
 - **PostgreSQL**
-<!-- - **JWT Authentication** -->
+- **JWT Authentication**
 - **dotenv**
 - **bcrypt**
 - **REST API Architecture**
 
 ---
+## Folder structure info
 
+- **config** folder contains postgreSQL connection configuration. 
+- **controllers** folder contains required REST controllers i.e. userController for sign-in and sign-up.
+- **routes** folder contains the API routes
+
+
+
+---
 ## API endpoints
 
 - **/api/test** : for testing the api if working

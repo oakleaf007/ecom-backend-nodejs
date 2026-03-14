@@ -1,12 +1,12 @@
 import pool from "../config/db.js";
 import bcrypt from "bcrypt";
-
+import jwt from "jsonwebtoken";
 export const signUp = async(req, res)=>{
     try{
         const {name, email, password} = req.body;
 
         const existingUser = await pool.query("select * from users where email =$1", 
-                [email]
+                [email.toLowerCase()]
         );
 
         if(existingUser.rows.length>0){
@@ -18,7 +18,7 @@ export const signUp = async(req, res)=>{
 
         const result = await pool.query(
             "Insert into users(name, email, password) values ($1, $2,$3) returning id, name, email",
-            [name, email, hashedPass]
+            [name, email.toLowerCase(), hashedPass]
         );
         res.status(201).json({message: "user created successfully"});
 
@@ -32,7 +32,7 @@ export const signIn = async(req, res)=>{
     try{
         const { email, password} = req.body;
 
-        const existingUser = await pool.query("select * from users where email =$1", [email]);
+        const existingUser = await pool.query("select * from users where email =$1", [email.toLowerCase()]);
         if(existingUser.rows.length===0){
             return res.status(404).json({message: "user not found"});
         }
@@ -43,7 +43,16 @@ export const signIn = async(req, res)=>{
         if(!comparePass){
             return res.status(401).json({message: "invalid credential"});
         }
-        res.status(200).json({message: "Login successful", user: {id:user.id, name: user.name, email: user.email}});
+
+
+        const token = jwt.sign(
+            {id: user.id},
+            process.env.JWT_SECRET,
+            {expiresIn: "1h"}
+
+            
+        )
+        res.status(200).json({message: "Login successful", token});
 
 
     }catch(error){

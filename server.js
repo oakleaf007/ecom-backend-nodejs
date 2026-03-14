@@ -7,13 +7,17 @@ const  app = express();
 
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "*",
+    methods:["GET","POST"],
+    credentials: true
+}));
 
 app.get("/", (req, res)=>{
     res.send("Server is running");
 });
 
-app.use("/api",router);
+app.use("/api/v1",router);
 
 
 app.listen(process.env.PORT,()=>{
