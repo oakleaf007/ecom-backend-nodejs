@@ -14,7 +14,7 @@ app.use(cors({
 }));
 
 app.get("/", (req, res)=>{
-    res.send("Server is running");
+    res.json({status: "ok"})
 });
 
 app.use("/api/v1",router);

@@ -3,8 +3,8 @@ import pool from "../config/db.js";
 
 export const profile= async(req, res)=>{
     try{
-const userId = req.user.id;
-console.log(userId)
+   const userId = req.user.id;
+
     const result = await pool.query("select name, email from users where id = $1", [userId]);
     
 
