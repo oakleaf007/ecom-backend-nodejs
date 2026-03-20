@@ -52,9 +52,5 @@ This API handles authentication, product management, and order processing for a 
 
 ## CURL test example
 
-curl -X GET "http://localhost:3000/api/v1/products?limit=10&offset=0" \
--H "Content-Type: application/json" \
--d '{
-"limit": "10",
-"offset":"0"
-}'
+curl -X GET "http://localhost:3000/api/v1/products/5" \
+-H "Content-Type: application/json"
